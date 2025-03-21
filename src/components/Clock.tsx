@@ -4,14 +4,22 @@ interface Props {
   clockName: string;
 }
 
+interface ClockState {
+  today: Date;
+}
+
 export class Clock extends React.Component<Props> {
-  state = {
+  state: ClockState = {
     today: new Date(),
   };
 
-  handleTimeUpdate = window.setInterval(() => {
-    this.setState(() => ({ today: new Date() }));
-  }, 1000);
+  handleTimeUpdate = 0;
+
+  componentDidMount(): void {
+    this.handleTimeUpdate = window.setInterval(() => {
+      this.setState(() => ({ today: new Date() }));
+    }, 1000);
+  }
 
   componentDidUpdate(prevProps: Readonly<Props>): void {
     // eslint-disable-next-line no-console

@@ -2,6 +2,11 @@ import React from 'react';
 import './App.scss';
 import { Clock } from './components/Clock';
 
+interface AppState {
+  clockName: string;
+  hasClock: boolean;
+}
+
 function getRandomName(): string {
   const value = Date.now().toString().slice(-4);
 
@@ -9,7 +14,7 @@ function getRandomName(): string {
 }
 
 export class App extends React.Component {
-  state = {
+  state: AppState = {
     clockName: 'Clock-0',
     hasClock: true,
   };
@@ -30,7 +35,10 @@ export class App extends React.Component {
     document.addEventListener('click', this.handleClick);
 
     this.timerId = window.setInterval(() => {
-      this.setState({ ...this.state, clockName: getRandomName() });
+      this.setState(prevState => ({
+        ...prevState,
+        clockName: getRandomName(),
+      }));
     }, 3300);
   }
 
