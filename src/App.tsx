@@ -23,11 +23,11 @@ export class App extends React.Component {
 
   handleContextMenu = (event: MouseEvent) => {
     event.preventDefault();
-    this.setState({ ...this.state, hasClock: false });
+    this.setState({ hasClock: false });
   };
 
   handleClick = () => {
-    this.setState({ ...this.state, hasClock: true });
+    this.setState({ hasClock: true });
   };
 
   componentDidMount(): void {
@@ -35,10 +35,7 @@ export class App extends React.Component {
     document.addEventListener('click', this.handleClick);
 
     this.timerId = window.setInterval(() => {
-      this.setState(prevState => ({
-        ...prevState,
-        clockName: getRandomName(),
-      }));
+      this.setState({ clockName: getRandomName() });
     }, 3300);
   }
 
