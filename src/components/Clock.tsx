@@ -10,9 +10,9 @@ export class Clock extends React.Component<Props> {
   };
 
   handleTimeUpdate = window.setInterval(() => {
-    this.setState({ ...this.state, today: new Date() });
+    this.setState(() => ({ today: new Date() }));
     // eslint-disable-next-line no-console
-    console.log(this.state.today.toUTCString().slice(-12, -4));
+    console.log(new Date().toUTCString().slice(-12, -4));
   }, 1000);
 
   componentDidUpdate(prevProps: Readonly<Props>): void {
